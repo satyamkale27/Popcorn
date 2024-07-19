@@ -51,7 +51,13 @@ const average = (arr) =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
 
 function NavBar({ children }) {
-  return <nav className="nav-bar">{children}</nav>;
+  return (
+    <nav className="nav-bar">
+      {" "}
+      <Logo />
+      {children}
+    </nav>
+  );
 }
 function Logo() {
   return (
@@ -82,11 +88,10 @@ function Search() {
   );
 }
 
-function Main({ movies }) {
+function Main({ children }) {
   return (
     <main className="main">
-      <ListBox movies={movies} />
-      <WatchedBox />
+      {children} <WatchedBox />
     </main>
   );
 }
@@ -96,11 +101,12 @@ export default function App() {
   return (
     <>
       <NavBar>
-        <Logo />
         <Search />
         <NumResults movies={movies} />
       </NavBar>
-      <Main movies={movies} />
+      <Main>
+        <ListBox movies={movies} />
+      </Main>
     </>
   );
 }
