@@ -3,15 +3,24 @@ const containerStyle = {
   alignItems: "center",
   gap: "16px",
 };
-export default function StarRating() {
+const StarontainerStyle = {
+  display: "flex",
+  gap: "4px",
+};
+const textStyle = {
+  lineHeight: "1",
+  margin: "0",
+};
+export default function StarRating({ MaxRating = 5 }) {
+  // if prop not passed then MaxRating default will be 5 //
   return (
     <div style={containerStyle}>
-      <div>
-        {Array.from({ length: 5 }, (_, i) => (
+      <div style={StarontainerStyle}>
+        {Array.from({ length: MaxRating }, (_, i) => (
           <span>s{i + 1}</span>
         ))}
       </div>
-      <p>10</p>
+      <p style={textStyle}>10</p>
     </div>
   );
 }
