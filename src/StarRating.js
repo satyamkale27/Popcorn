@@ -12,7 +12,11 @@ const textStyle = {
   lineHeight: "1",
   margin: "0",
 };
-export default function StarRating({ MaxRating = 5 }) {
+export default function StarRating({
+  MaxRating = 5,
+  color = "#fcc419",
+  size = 48,
+}) {
   // if prop not passed then MaxRating default will be 5 //
   const [rating, setRating] = useState(0);
   const [tempRating, setTempRating] = useState(0);
