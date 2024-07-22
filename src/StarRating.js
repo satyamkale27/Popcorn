@@ -28,11 +28,12 @@ export default function StarRating({ MaxRating = 5 }) {
             onRate={() => handelRating(i + 1)}
             onHoverIn={() => setTempRating(i + 1)}
             onHoverOut={() => setTempRating(0)}
-            full={rating >= i + 1}
+            full={tempRating ? tempRating >= i + 1 : rating >= i + 1}
+            // full={tempRating ? false : true}
           />
         ))}
       </div>
-      <p style={textStyle}>{tempRating || ""}</p>
+      <p style={textStyle}>{tempRating || rating || ""}</p>
     </div>
   );
 }
@@ -43,6 +44,7 @@ const starStyle = {
   cursor: "pointer",
 };
 function Star({ onRate, full, onHoverIn, onHoverOut }) {
+  console.log(`value of full is ${full}`);
   return (
     <span
       role="button"
