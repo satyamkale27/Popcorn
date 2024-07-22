@@ -13,6 +13,8 @@ export default function StarRating({
   MaxRating = 5,
   color = "#fcc419",
   size = 48,
+  className = "",
+  messages = [],
 }) {
   // if prop not passed then MaxRating default will be 5 //
   const [rating, setRating] = useState(0);
@@ -27,7 +29,7 @@ export default function StarRating({
     fontSize: `${size / 1.5}px`,
   };
   return (
-    <div style={containerStyle}>
+    <div style={containerStyle} className={className}>
       <div style={StarontainerStyle}>
         {Array.from({ length: MaxRating }, (_, i) => (
           <Star
@@ -41,7 +43,11 @@ export default function StarRating({
           />
         ))}
       </div>
-      <p style={textStyle}>{tempRating || rating || ""}</p>
+      <p style={textStyle}>
+        {messages.length === MaxRating
+          ? messages[tempRating ? tempRating - 1 : rating - 1]
+          : tempRating || rating || ""}
+      </p>
     </div>
   );
 }
