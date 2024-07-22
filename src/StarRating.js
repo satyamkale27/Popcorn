@@ -15,6 +15,7 @@ const textStyle = {
 export default function StarRating({ MaxRating = 5 }) {
   // if prop not passed then MaxRating default will be 5 //
   const [rating, setRating] = useState(0);
+  const [tempRating, setTempRating] = useState(0);
   function handelRating(rating) {
     setRating(rating);
   }
@@ -41,7 +42,13 @@ const starStyle = {
 };
 function Star({ onRate, full }) {
   return (
-    <span role="button" style={starStyle} onClick={onRate}>
+    <span
+      role="button"
+      style={starStyle}
+      onClick={onRate}
+      onMouseEnter={() => console.log("enter")}
+      onMouseLeave={() => console.log("Leave")}
+    >
       {full ? (
         <svg
           xmlns="http://www.w3.org/2000/svg"
