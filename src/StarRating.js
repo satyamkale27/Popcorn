@@ -15,10 +15,11 @@ export default function StarRating({
   size = 48,
   className = "",
   messages = [],
+  defaultRating = 0,
 }) {
   // if prop not passed then MaxRating default will be 5 //
   const [rating, setRating] = useState(0);
-  const [tempRating, setTempRating] = useState(0);
+  const [tempRating, setTempRating] = useState(defaultRating);
   function handelRating(rating) {
     setRating(rating);
   }
