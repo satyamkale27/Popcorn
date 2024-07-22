@@ -16,12 +16,14 @@ export default function StarRating({
   className = "",
   messages = [],
   defaultRating = 0,
+  onSetRating,
 }) {
   // if prop not passed then MaxRating default will be 5 //
   const [rating, setRating] = useState(0);
   const [tempRating, setTempRating] = useState(defaultRating);
   function handelRating(rating) {
     setRating(rating);
+    onSetRating(rating); // api state update state from other file or component //
   }
   const textStyle = {
     lineHeight: "1",
