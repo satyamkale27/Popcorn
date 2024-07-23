@@ -1,4 +1,5 @@
 import { useState } from "react";
+import PropTypes from "prop-types";
 
 const containerStyle = {
   display: "flex",
@@ -7,6 +8,14 @@ const containerStyle = {
 };
 const StarontainerStyle = {
   display: "flex",
+};
+
+StarRating.prototype = {
+  MaxRating: PropTypes.number,
+  defaultRating: PropTypes.number,
+  color: PropTypes.number,
+  messages: PropTypes.array,
+  className: PropTypes.string,
 };
 
 export default function StarRating({
