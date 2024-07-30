@@ -87,7 +87,7 @@ function Search() {
     />
   );
 }
-const KEY = "";
+const KEY = "13c49e80";
 function Main({ children }) {
   return <main className="main">{children}</main>;
 }
@@ -97,7 +97,7 @@ export default function App() {
   const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const query = "interstellar";
+  const query = "sgwyeujdhejud";
   useEffect(function () {
     async function fetchMovies() {
       try {
@@ -110,6 +110,7 @@ export default function App() {
           throw new Error("something went wrong with fetching movies");
 
         const data = await res.json();
+        if (data.Response === "False") throw new Error("Movie not found");
         setMovies(data.Search);
         setIsLoading(false);
       } catch (err) {
