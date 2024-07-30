@@ -115,6 +115,7 @@ export default function App() {
       } catch (err) {
         console.error(err.message);
         setError(err.message);
+      } finally {
         setIsLoading(false);
       }
     }
