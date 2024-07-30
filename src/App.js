@@ -87,7 +87,7 @@ function Search() {
     />
   );
 }
-const KEY = "13c49e80";
+const KEY = "Add your own Key";
 function Main({ children }) {
   return <main className="main">{children}</main>;
 }
