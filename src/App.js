@@ -51,6 +51,7 @@ const average = (arr) =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
 
 // const KEY = "Add your own Key";
+const KEY = "13c49e80";
 
 export default function App() {
   const [query, setQuery] = useState("");
@@ -58,7 +59,7 @@ export default function App() {
   const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const tempQuery = "inception";
+  const [selectedId, setSelectedId] = useState(null);
   /*
   notes to clear concept of useEffect 
   useEffect(function () {
@@ -78,6 +79,11 @@ export default function App() {
 
   console.log("During render");
     */
+
+  function handelSelectMovie(id) {
+    setSelectedId(id);
+  }
+
   useEffect(
     function () {
       async function fetchMovies() {
@@ -94,13 +100,17 @@ export default function App() {
           const data = await res.json();
           if (data.Response === "False") throw new Error("Movie not found");
           setMovies(data.Search);
-          console.log(data);
         } catch (err) {
           console.error(err.message);
           setError(err.message);
         } finally {
           setIsLoading(false);
         }
+      }
+      if (query.length < 3) {
+        setMovies([]);
+        setError("");
+        return;
       }
       fetchMovies();
     },
@@ -117,14 +127,20 @@ export default function App() {
         <Box>
           {/* {isLoading ? <Loader /> : <MovieList movies={movies} />} */}
           {isLoading && <Loader />}
-          {!isLoading && !error && <MovieList movies={movies} />}
+          {!isLoading && !error && (
+            <MovieList movies={movies} onSelectMovie={handelSelectMovie} />
+          )}
           {error && <Errormessage message={error} />}
         </Box>
         <Box>
-          <>
-            <WatchedSummary watched={watched} />
-            <WatchMovieList watched={watched} />
-          </>
+          {selectedId ? (
+            <MovieDetails selectedId={selectedId} />
+          ) : (
+            <>
+              <WatchedSummary watched={watched} />
+              <WatchMovieList watched={watched} />
+            </>
+          )}
         </Box>
       </Main>
     </>
@@ -194,18 +210,18 @@ function Box({ children }) {
     </div>
   );
 }
-function MovieList({ movies }) {
+function MovieList({ movies, onSelectMovie }) {
   return (
     <ul className="list">
       {movies?.map((movie) => (
-        <Movie movie={movie} key={movie.imdbID} />
+        <Movie movie={movie} key={movie.imdbID} onSelectMovie={onSelectMovie} />
       ))}
     </ul>
   );
 }
-function Movie({ movie }) {
+function Movie({ movie, onSelectMovie }) {
   return (
-    <li>
+    <li onClick={() => onSelectMovie(movie.imdbID)}>
       <img src={movie.Poster} alt={`${movie.Title} poster`} />
       <h3>{movie.Title}</h3>
       <div>
@@ -239,6 +255,11 @@ function Movie({ movie }) {
 //     </div>
 //   );
 // }
+
+function MovieDetails({ selectedId }) {
+  return <div className="details">{selectedId}</div>;
+}
+
 function WatchedSummary({ watched }) {
   const avgImdbRating = average(watched.map((movie) => movie.imdbRating));
   const avgUserRating = average(watched.map((movie) => movie.userRating));
