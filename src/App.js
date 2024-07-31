@@ -87,6 +87,7 @@ function Search({ query, setQuery }) {
   );
 }
 // const KEY = "Add your own Key";
+
 function Main({ children }) {
   return <main className="main">{children}</main>;
 }
@@ -98,17 +99,25 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const tempQuery = "interstellar";
-
+  /*
+  notes to clear concept of useEffect 
   useEffect(function () {
-    console.log("A");
+    console.log("After initial render");
   }, []);
 
   useEffect(function () {
-    console.log("B");
+    console.log("After every render");
   });
 
-  console.log("c");
+  useEffect(
+    function () {
+      console.log("D");
+    },
+    [query]
+  );
 
+  console.log("During render");
+    */
   useEffect(function () {
     async function fetchMovies() {
       try {
