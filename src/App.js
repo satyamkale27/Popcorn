@@ -51,7 +51,6 @@ const average = (arr) =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
 
 // const KEY = "Add your own Key";
-const KEY = "13c49e80";
 
 export default function App() {
   const [query, setQuery] = useState("");
@@ -81,7 +80,10 @@ export default function App() {
     */
 
   function handelSelectMovie(id) {
-    setSelectedId(id);
+    setSelectedId((selectedId) => (id === selectedId ? null : id));
+  }
+  function handelCloseMovie() {
+    setSelectedId(null);
   }
 
   useEffect(
@@ -134,7 +136,10 @@ export default function App() {
         </Box>
         <Box>
           {selectedId ? (
-            <MovieDetails selectedId={selectedId} />
+            <MovieDetails
+              selectedId={selectedId}
+              onCloseMovie={handelCloseMovie}
+            />
           ) : (
             <>
               <WatchedSummary watched={watched} />
@@ -256,8 +261,15 @@ function Movie({ movie, onSelectMovie }) {
 //   );
 // }
 
-function MovieDetails({ selectedId }) {
-  return <div className="details">{selectedId}</div>;
+function MovieDetails({ selectedId, onCloseMovie }) {
+  return (
+    <div className="details">
+      <button className="btn-back" onClick={onCloseMovie}>
+        &larr;
+      </button>
+      {selectedId}
+    </div>
+  );
 }
 
 function WatchedSummary({ watched }) {
