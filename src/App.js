@@ -51,6 +51,7 @@ const average = (arr) =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
 
 // const KEY = "Add your own Key";
+const KEY = "13c49e80";
 
 export default function App() {
   const [query, setQuery] = useState("");
@@ -262,6 +263,17 @@ function Movie({ movie, onSelectMovie }) {
 // }
 
 function MovieDetails({ selectedId, onCloseMovie }) {
+  useEffect(function () {
+    async function getMovieDetails() {
+      const res = await fetch(
+        `https://www.omdbapi.com/?apikey=${KEY}&i=${selectedId}`
+      );
+      const data = await res.json();
+      console.log(data);
+    }
+    getMovieDetails();
+  }, []);
+
   return (
     <div className="details">
       <button className="btn-back" onClick={onCloseMovie}>
