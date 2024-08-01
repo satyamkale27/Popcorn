@@ -72,7 +72,6 @@ function Star({ onRate, full, onHoverIn, onHoverOut, color, size }) {
     display: "block",
     cursor: "pointer",
   };
-  console.log(`value of full is ${full}`);
   return (
     <span
       role="button"
