@@ -52,7 +52,6 @@ const average = (arr) =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
 
 // const KEY = "Add your own Key";
-const KEY = "13c49e80";
 
 export default function App() {
   const [query, setQuery] = useState("");
@@ -128,6 +127,7 @@ export default function App() {
         setError("");
         return;
       }
+      handelCloseMovie();
       fetchMovies();
 
       return function () {
