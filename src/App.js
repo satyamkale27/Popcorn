@@ -97,7 +97,7 @@ export default function App() {
 
   useEffect(
     function () {
-      localStorage.setItem("watched", JSON.stringify());
+      localStorage.setItem("watched", JSON.stringify(watched));
     },
     [watched]
   );
