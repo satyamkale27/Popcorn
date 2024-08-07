@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import StarRating from "./StarRating";
 
 const tempMovieData = [
@@ -215,10 +215,15 @@ function NumResults({ movies }) {
 }
 
 function Search({ query, setQuery }) {
+  const inputEl = useRef(null); // react way declaritive //
   useEffect(function () {
-    const el = document.querySelector(".search");
-    el.focus();
+    inputEl.current.focus();
   }, []);
+  // useEffect(function () {
+  //   const el = document.querySelector(".search");  // old way notbreact way //
+  //   el.focus();
+  // }, []);
+
   return (
     <input
       className="search"
@@ -226,6 +231,7 @@ function Search({ query, setQuery }) {
       placeholder="Search movies..."
       value={query}
       onChange={(e) => setQuery(e.target.value)}
+      ref={inputEl}
     />
   );
 }
